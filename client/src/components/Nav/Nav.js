@@ -3,9 +3,9 @@ import React from "react";
 function Nav() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand" href="/">
+            <h1 className="title" href="/">
                 Google Books Search
-            </a>
+            </h1>
             <button className type="button" class="btn">Search</button>
             <button className type="button" class="btn">Saved</button>
         </nav>
