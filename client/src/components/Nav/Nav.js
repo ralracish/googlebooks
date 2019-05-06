@@ -6,8 +6,8 @@ function Nav() {
             <h1 className="title" href="/">
                 Google Books Search
             </h1>
-            <button className type="button" class="btn">Search</button>
-            <button className type="button" class="btn">Saved</button>
+            <button className type="button" class="btn btn-success">Search</button>
+            <button className type="button" class="btn btn-success">Saved</button>
         </nav>
     );
 }

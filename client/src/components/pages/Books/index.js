@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Jumbotron from "../Jumbotron";
 import API from "../../../util/API";
-import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
-import SearchForm from "../SearchForm"
+import SearchForm from "../SearchForm";
 import GoogleBooksAPI from "../../../util/GoogleBooksAPI"
 import GoogleBooksList from "../GoogleBooksList";
-import SavedBooksList from "../SaveBooksList";
+import SavedBooksList from "../SavedBooksList";
 
 class Books extends Component {
     state = {
@@ -31,9 +30,7 @@ class Books extends Component {
                 this.setState({ books: res.data, }, () => {
                     this.setState({ loadComplete: true })
                 })
-            }
-
-            )
+            })
             .catch(err => console.log(err));
     };
 
@@ -51,7 +48,6 @@ class Books extends Component {
     };
 
     handleSave = book => {
-        //event.preventDefault();
         console.log(book)
         if (book) {
             API.saveBook(book.volumeInfo)
@@ -68,23 +64,15 @@ class Books extends Component {
         console.log(this.state.search)
         if (this.state.search) {
             GoogleBooksAPI.search(this.state.search)
-
                 .then(res => {
-
                     this.setState({ searchResults: res.data.items }, () => {
                         console.log(this.state.searchResults)
                     })
-                    //this.loadBooks()
                 })
                 .catch(err => console.log(err))
         }
     };
 
-    // image: this.state.image,
-    // title: this.state.title,
-    // authors: this.state.authors,
-    // description: this.state.description,
-    // link: this.state.link
     render() {
         return (
             <Container fluid>
@@ -99,7 +87,6 @@ class Books extends Component {
                         handleInputChange={this.handleInputChange}
                         handleFormSubmit={this.handleFormSubmit}
                     />
-
                     <GoogleBooksList
                         results={this.state.searchResults}
                         saveBook={this.handleSave}
