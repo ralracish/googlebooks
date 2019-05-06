@@ -20,11 +20,12 @@ function GoogleBooksList(props) {
                             <h3>Authors: {result.volumeInfo.authors}</h3>
                             <h5>Description: {result.volumeInfo.description}</h5>
                             <a href="link">Link: {result.volumeInfo.infoLink}</a><br />
-                        <br />
-                        <br />
+                            <a onClick={() => props.saveBook(result)} className="btn btn-success" bookId={result.volumeInfo.id}>Save Book</a>
                         </div>
                     </div>
-                    <a onClick={()=>props.saveBook(result)} className="btn btn-success" bookId={result.volumeInfo.id}>Save Book</a>
+                    <br />
+                    <br />
+                    <hr />
                 </div>
         )})}
         </li>
