@@ -11,10 +11,25 @@ module.exports = {
     },
 
     create: function (req, res) {
+        
+        const bookInfo = {
+            title: req.body.title,
+            authors: req.body.authors,
+            description: req.body.description,
+            image: req.body.imageLinks.smallThumbnail,
+            link: req.body.infoLink
+        };
+        //console.log('..test', bookInfo)
         db.Book
-            .create(req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+            .create(bookInfo)
+            .then(dbModel => {
+                //console.log(dbModel)
+                res.json(dbModel)
+            } )
+            .catch(err => {
+                console.log(err)
+                res.status(422).json(err)
+            });
     },
     
     remove: function (req, res) {

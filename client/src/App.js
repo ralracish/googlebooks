@@ -20,13 +20,13 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <Jumbotron>
+        {/* <Jumbotron>
           <h1>(React) Google Book Search</h1>
           <h2>Search for and Save Books of Interest</h2>
-        </Jumbotron>
-        <SearchForm />
+        </Jumbotron> */}
+        {/* <SearchForm /> */}
           <Switch>
-          {/* <Route exact path="/" component={Books} /> */}
+          <Route exact path="/" component={Books} />
           {/* <Route exact path="/books" component={Books} /> */}
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           {/* <Route component={NoMatch} /> */}

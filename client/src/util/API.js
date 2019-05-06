@@ -9,10 +9,13 @@ export default {
         return axios.get(BASEURL + q + APIKEY)
     },
     getBooks: function () {
-        return axios.get("/books")
+        return axios.get("/api/books")
     },
     deleteBooks: function (id) {
-        return axios.delete("/books/" + id)
+        return axios.delete("/api/books/" + id)
+    },
+    saveBook: book => {
+        return axios.post('/api/books', book);
     }
-    
+
 };

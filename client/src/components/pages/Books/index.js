@@ -3,8 +3,10 @@ import Jumbotron from "../Jumbotron";
 import API from "../../../util/API";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
-// import SearchBtn from "../SearchBtn"
+import SearchForm from "../SearchForm"
 import GoogleBooksAPI from "../../../util/GoogleBooksAPI"
+import GoogleBooksList from "../GoogleBooksList";
+import SavedBooksList from "../SaveBooksList";
 
 class Books extends Component {
     state = {
@@ -13,7 +15,9 @@ class Books extends Component {
         authors: "",
         description: "",
         image: "",
-        link: ""
+        link: "",
+        searchResults: [],
+        loadComplete: false,
     };
 
     componentDidMount() {
@@ -22,8 +26,13 @@ class Books extends Component {
 
     loadBooks = () => {
         API.getBooks()
-            .then(res =>
-                this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+            .then(res => {
+                console.log(res)
+                this.setState({ books: res.data, }, () => {
+                    this.setState({ loadComplete: true })
+                })
+            }
+
             )
             .catch(err => console.log(err));
     };
@@ -41,41 +50,73 @@ class Books extends Component {
         });
     };
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        if (this.state.title && this.state.author) {
-            API.saveBook({
-                image: this.state.image,
-                title: this.state.title,
-                authors: this.state.authors,
-                description: this.state.description,
-                link: this.state.link
-            })
-                .then(res => this.loadBooks())
+    handleSave = book => {
+        //event.preventDefault();
+        console.log(book)
+        if (book) {
+            API.saveBook(book.volumeInfo)
+                .then(res => {
+                    console.log(res);
+                    this.loadBooks()
+                })
                 .catch(err => console.log(err));
         }
     };
 
+    handleFormSubmit = event => {
+        event.preventDefault();
+        console.log(this.state.search)
+        if (this.state.search) {
+            GoogleBooksAPI.search(this.state.search)
+
+                .then(res => {
+
+                    this.setState({ searchResults: res.data.items }, () => {
+                        console.log(this.state.searchResults)
+                    })
+                    //this.loadBooks()
+                })
+                .catch(err => console.log(err))
+        }
+    };
+
+    // image: this.state.image,
+    // title: this.state.title,
+    // authors: this.state.authors,
+    // description: this.state.description,
+    // link: this.state.link
     render() {
         return (
             <Container fluid>
                 <Row>
                     <Col size="md-6">
                         <Jumbotron>
-                            <h1>Search for a Book</h1>
+                            <h1>(React) Google Book Search</h1>
                         </Jumbotron>
                     </Col>
+                    <SearchForm
+                        value={this.state.search}
+                        handleInputChange={this.handleInputChange}
+                        handleFormSubmit={this.handleFormSubmit}
+                    />
+
+                    <GoogleBooksList
+                        results={this.state.searchResults}
+                        saveBook={this.handleSave}
+                    />
                     <Col size="md-6 sm-12">
                         <Jumbotron>
                             <h1>Books On My List</h1>
+                            {
+                                this.state.loadComplete &&
+                                <SavedBooksList results={this.state.books} />
+                            }
                         </Jumbotron>
-                        ) : (
-                                <h3>No Results to Display</h3>
                     </Col>
                 </Row>
             </Container>
         );
     }
-
+}
 
 export default Books;
