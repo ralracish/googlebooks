@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import SearchForm from "../SearchForm";
 import GoogleBooksAPI from "../../../util/GoogleBooksAPI"
 import GoogleBooksList from "../GoogleBooksList";
-import SavedBooksList from "../SavedBooksList";
+// import SavedBooksList from "../SavedBooksList";
 
 class Books extends Component {
     state = {
@@ -91,7 +91,7 @@ class Books extends Component {
                         results={this.state.searchResults}
                         saveBook={this.handleSave}
                     />
-                    <Col size="md-6 sm-12">
+                    {/* <Col size="md-6 sm-12">
                         <Jumbotron>
                             <h1>Books On My List</h1>
                             {
@@ -99,7 +99,7 @@ class Books extends Component {
                                 <SavedBooksList results={this.state.books} />
                             }
                         </Jumbotron>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
         );
