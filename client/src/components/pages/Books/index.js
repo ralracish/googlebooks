@@ -91,15 +91,6 @@ class Books extends Component {
                         results={this.state.searchResults}
                         saveBook={this.handleSave}
                     />
-                    {/* <Col size="md-6 sm-12">
-                        <Jumbotron>
-                            <h1>Books On My List</h1>
-                            {
-                                this.state.loadComplete &&
-                                <SavedBooksList results={this.state.books} />
-                            }
-                        </Jumbotron>
-                    </Col> */}
                 </Row>
             </Container>
         );

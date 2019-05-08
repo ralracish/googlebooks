@@ -10,8 +10,6 @@ function Nav() {
             </h1>
             <NavLink className="navlink" to='/'>Search</NavLink>
             <NavLink className="navlink"to='/saved'>Saved</NavLink>
-            {/* <button className type="button" class="btn btn-success">Search</button> */}
-            {/* <button className type="button" class="btn btn-success">Saved</button> */}
         </nav>
     );
 }

@@ -19,11 +19,10 @@ module.exports = {
             image: req.body.imageLinks.smallThumbnail,
             link: req.body.infoLink
         };
-        //console.log('..test', bookInfo)
+
         db.Book
             .create(bookInfo)
             .then(dbModel => {
-                //console.log(dbModel)
                 res.json(dbModel)
             } )
             .catch(err => {
